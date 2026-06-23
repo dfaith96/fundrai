@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundrai | AI Funding and Investment</title>
+  <style>
+    :root {
+      --ink: #f8fafc;
+      --muted: #cbd5e1;
+      --line: #243244;
+      --paper: #000000;
+      --white: #ffffff;
+      --navy: #122033;
+      --blue: #2563eb;
+      --cyan: #0891b2;
+      --green: #168056;
+      --amber: #c47a18;
+      --rose: #be3144;
+      --shadow: 0 22px 60px rgba(16, 22, 36, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #000000;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.88rem;
+    }
+
+    .topbar .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #05070b;
+      border-bottom: 1px solid #1f2937;
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.18rem;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: conic-gradient(from 170deg, var(--blue), var(--cyan), var(--green), var(--blue));
+      border-radius: 8px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+    }
+
+    .brand small {
+      display: block;
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 750;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #e2e8f0;
+      font-size: 0.94rem;
+      font-weight: 800;
+    }
+
+    .btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+    }
+
+    .btn-secondary {
+      color: #f8fafc;
+      background: #111827;
+      border-color: #334155;
+    }
+
+    .btn-light {
+      color: #f8fafc;
+      background: #111827;
+      border-color: #334155;
+    }
+
+    .hero {
+      color: #f8fafc;
+      background:
+        linear-gradient(130deg, rgba(0, 0, 0, 0.98), rgba(4, 12, 24, 0.96) 48%, rgba(8, 47, 73, 0.92)),
+        linear-gradient(90deg, #000000, #061224);
+      overflow: hidden;
+    }
+
+    .hero .wrap {
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(340px, 0.9fr);
+      gap: 44px;
+      align-items: center;
+      padding: 64px 0 76px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #e2e8f0;
+      margin: 22px 0 28px;
+      font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 650px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #0b1120;
+      border-color: #27364a;
+      box-shadow: 0 10px 24px rgba(16, 22, 36, 0.06);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.45rem;
+    }
+
+    .metric span {
+      color: #cbd5e1;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .platform {
+      position: relative;
+      background: #0b1120;
+      color: #f8fafc;
+      border: 1px solid #27364a;
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .platform::before {
+      content: "";
+      position: absolute;
+      inset: -30px -18px auto auto;
+      width: 170px;
+      height: 170px;
+      background: rgba(37, 99, 235, 0.2);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .platform-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .platform-head h2 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .status::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .signal-map {
+      width: 100%;
+      height: auto;
+      margin: 18px 0;
+      display: block;
+    }
+
+    .deal-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .deal-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #111827;
+    }
+
+    .deal-row strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .deal-row span {
+      color: #cbd5e1;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .score {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border-radius: 8px;
+      font-weight: 950;
+      background: var(--green);
+    }
+
+    section {
+      padding: 82px 0;
+      background: #000000;
+    }
+
+    section:nth-of-type(odd) {
+      background: #05070b;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.55fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    .section-head h2,
+    .investment-band h2,
+    .cta h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .investment-band p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 1.02rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #0b1120;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(16, 22, 36, 0.06);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--blue);
+      border-radius: 8px;
+      font-weight: 950;
+      margin-bottom: 16px;
+    }
+
+    .card h3,
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p,
+    .step p {
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .card ul {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: #e2e8f0;
+    }
+
+    .card li + li {
+      margin-top: 7px;
+    }
+
+    .investment-band {
+      color: white;
+      background: #000000;
+    }
+
+    .investment-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(340px, 1fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .investment-band p {
+      color: #f1f7ff;
+      margin-top: 18px;
+    }
+
+    .toolbox {
+      background: #0b1120;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 850;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #f8fafc;
+      background: #111827;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    }
+
+    .result {
+      margin-top: 16px;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 14px;
+      color: #1e3a8a;
+      background: #0f2d52;
+    }
+
+    .result strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step {
+      border-top: 4px solid var(--blue);
+      background: #0b1120;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 12px 26px rgba(16, 22, 36, 0.06);
+    }
+
+    .step b {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    .marketplace {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pipeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #0b1120;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 8px;
+      padding: 4px 9px;
+      color: #ecfeff;
+      background: #155e75;
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--cyan);
+      border-radius: 8px;
+      font-weight: 950;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: #0b1120;
+    }
+
+    .bar {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #1f2937;
+      margin: 10px 0 18px;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .cta {
+      color: white;
+      background: #000000;
+    }
+
+    .cta-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .cta p {
+      max-width: 700px;
+      color: #f1f7ff;
+      margin: 16px 0 0;
+    }
+
+    footer {
+      color: #ffffff;
+      background: #000000;
+      padding: 44px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    footer h3,
+    footer h4 {
+      margin: 0 0 12px;
+      color: white;
+    }
+
+    footer p,
+    footer a,
+    footer span {
+      color: #e2e8f0;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .copyright {
+      grid-column: 1 / -1;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .topbar .wrap,
+      .hero .wrap,
+      .section-head,
+      .investment-layout,
+      .marketplace,
+      .cta-box,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero .wrap {
+        min-height: auto;
+        padding: 56px 0 64px;
+      }
+
+      .grid,
+      .workflow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar .wrap,
+      .metrics,
+      .grid,
+      .workflow,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.7rem;
+      }
+
+      .platform,
+      .toolbox,
+      .card,
+      .panel {
+        padding: 18px;
+      }
+
+      .pipeline-item {
+        grid-template-columns: auto 1fr;
+      }
+
+      .pipeline-item .tag {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <span>AI funding intelligence for founders and investors</span>
+      <span>Screen deals. Prepare rounds. Track portfolio signals.</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Fundrai home">
+        <span class="logo">F</span>
+        <span>Fundrai <small>AI Capital Platform</small></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#product-service">Product & Service</a>
+        <a href="#fit">Funding Fit</a>
+        <a href="#deals">Deals</a>
+        <a href="#investors">Investors</a>
+        <a class="btn btn-primary" href="#contact">Start Review</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow">AI Funding and Investment</span>
+          <h1>Funding and investment support for AI startups.</h1>
+          <p>Fundrai helps AI founders find the right capital, prepare stronger pitch materials, and helps investors review AI opportunities with clear evidence.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#fit">Estimate Funding Fit</a>
+            <a class="btn btn-secondary" href="#features">See What It Does</a>
+          </div>
+          <div class="metrics" aria-label="Fundrai platform metrics">
+            <div class="metric">
+              <strong>84%</strong>
+              <span>readiness signal</span>
+            </div>
+            <div class="metric">
+              <strong>$2.4M</strong>
+              <span>target seed round</span>
+            </div>
+            <div class="metric">
+              <strong>18</strong>
+              <span>matched investors</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="platform" aria-label="Fundrai investment dashboard preview">
+          <div class="platform-head">
+            <h2>Clear AI Investment Review</h2>
+            <span class="status">Live signals</span>
+          </div>
+          <svg class="signal-map" viewBox="0 0 560 300" role="img" aria-label="AI investment signal map">
+            <rect width="560" height="300" rx="12" fill="#f8fbff"></rect>
+            <line x1="76" y1="228" x2="484" y2="228" stroke="#cbd5e1" stroke-width="2"></line>
+            <line x1="76" y1="70" x2="76" y2="228" stroke="#cbd5e1" stroke-width="2"></line>
+            <path d="M86 214 C150 174, 178 190, 230 145 S334 80, 404 106 S462 82, 488 58" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round"></path>
+            <path d="M88 225 C156 210, 190 178, 238 184 S326 132, 386 150 S446 132, 488 118" fill="none" stroke="#168056" stroke-width="8" stroke-linecap="round"></path>
+            <circle cx="230" cy="145" r="12" fill="#2563eb"></circle>
+            <circle cx="404" cy="106" r="12" fill="#2563eb"></circle>
+            <circle cx="386" cy="150" r="12" fill="#168056"></circle>
+            <g fill="#101624" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="18">
+              <text x="96" y="46">Funding signal map</text>
+              <text x="96" y="266" fill="#64748b" font-size="14">traction</text>
+              <text x="414" y="266" fill="#64748b" font-size="14">defensibility</text>
+            </g>
+          </svg>
+          <div class="deal-list">
+            <div class="deal-row">
+              <div>
+                <strong>VisionOps AI</strong>
+                <span>Computer vision for factories</span>
+              </div>
+              <div class="score">91</div>
+            </div>
+            <div class="deal-row">
+              <div>
+                <strong>MedSynth Labs</strong>
+                <span>Clinical workflow automation</span>
+              </div>
+              <div class="score" style="background: var(--amber);">76</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--blue);">What Fundrai Does</span>
+            <h2>Simple tools for AI fundraising and investment review.</h2>
+          </div>
+          <p>Fundrai connects founder preparation, investor screening, diligence evidence, and portfolio monitoring in one clear workflow.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">M</div>
+            <h3>Investor Matching</h3>
+            <p>Match AI companies with aligned angels, accelerators, funds, grants, and strategic investors.</p>
+            <ul>
+              <li>Stage, sector, and ticket-size matching</li>
+              <li>Warm outreach priorities</li>
+              <li>Capital path recommendations</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--cyan);">D</div>
+            <h3>AI Due Diligence</h3>
+            <p>Review AI claims against evidence, model risk, data rights, customer traction, and market quality.</p>
+            <ul>
+              <li>Risk flags and follow-up questions</li>
+              <li>Technical defensibility scoring</li>
+              <li>Compliance and data checks</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--green);">P</div>
+            <h3>Pitch Intelligence</h3>
+            <p>Improve pitch decks, investor memos, use-of-funds logic, and fundraising narratives.</p>
+            <ul>
+              <li>Deck clarity review</li>
+              <li>Financial assumption checks</li>
+              <li>Investor Q&A preparation</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="product-service">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--blue);">Product & Service Features</span>
+            <h2>Fundrai provides both software tools and guided funding support.</h2>
+          </div>
+          <p>Founders can prepare for capital faster, while investors get a clearer view of AI startup quality, risk, and opportunity.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">1</div>
+            <h3>AI Startup Funding Profile</h3>
+            <p>Create a structured company profile covering stage, market, product, traction, team, revenue, capital need, and AI advantage.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--cyan);">2</div>
+            <h3>Investor Readiness Report</h3>
+            <p>Generate a practical report showing strengths, weak points, risk areas, and the next actions needed before investor outreach.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--green);">3</div>
+            <h3>Pitch Deck Review</h3>
+            <p>Review pitch decks for clarity, business logic, AI defensibility, financial assumptions, use of funds, and investor questions.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--amber);">4</div>
+            <h3>Capital Matching</h3>
+            <p>Match startups with suitable grants, accelerators, angel investors, venture funds, and strategic funding partners.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--rose);">5</div>
+            <h3>AI Due Diligence Support</h3>
+            <p>Help investors check AI claims, data rights, model performance, customer proof, compliance concerns, and market opportunity.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--blue);">6</div>
+            <h3>Portfolio Monitoring</h3>
+            <p>Track startup runway, revenue progress, product milestones, investor updates, and readiness for follow-on funding.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="investment-band" id="fit">
+      <div class="wrap investment-layout">
+        <div>
+          <span class="eyebrow">Funding Fit Estimator</span>
+          <h2>Check the right capital path for an AI company.</h2>
+          <p>Enter simple company details and Fundrai estimates the likely funding path, readiness score, and next preparation steps. This is informational and not financial, legal, tax, or securities advice.</p>
+        </div>
+
+        <div class="toolbox">
+          <div class="form-grid">
+            <label>
+              Company Stage
+              <select id="stage">
+                <option value="1">Idea or prototype</option>
+                <option value="2">MVP launched</option>
+                <option value="3" selected>Early revenue</option>
+                <option value="4">Scaling revenue</option>
+              </select>
+            </label>
+            <label>
+              Monthly Revenue
+              <input id="revenue" type="number" min="0" value="15000" />
+            </label>
+            <label>
+              AI Defensibility
+              <select id="moat">
+                <option value="1">Low</option>
+                <option value="2">Moderate</option>
+                <option value="3" selected>Strong</option>
+              </select>
+            </label>
+            <label>
+              Capital Needed
+              <input id="capital" type="number" min="0" value="500000" />
+            </label>
+          </div>
+          <button class="btn btn-primary" id="fitBtn" style="margin-top: 16px;">Estimate Funding Fit</button>
+          <div class="result" id="fitResult">
+            <strong>Funding fit ready</strong>
+            Enter company details to estimate the most suitable capital path.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deals">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--blue);">Deal Pipeline</span>
+            <h2>Prioritize AI opportunities by evidence, readiness, and investor fit.</h2>
+          </div>
+          <p>Fundrai keeps deal review practical: traction, technical moat, risk, round size, and next action are visible at a glance.</p>
+        </div>
+
+        <div class="marketplace">
+          <div class="panel">
+            <h3>Portfolio Readiness</h3>
+            <p style="color: var(--muted); margin-top: 0;">Current quality of the reviewed AI pipeline.</p>
+            <strong>Founder preparation</strong>
+            <div class="bar"><span style="width: 82%;"></span></div>
+            <strong>Investor fit</strong>
+            <div class="bar"><span style="width: 74%;"></span></div>
+            <strong>Diligence completeness</strong>
+            <div class="bar"><span style="width: 68%;"></span></div>
+            <strong>Follow-on readiness</strong>
+            <div class="bar"><span style="width: 57%;"></span></div>
+          </div>
+
+          <div class="pipeline">
+            <article class="pipeline-item">
+              <div class="avatar">N</div>
+              <div>
+                <strong>NeuroDesk</strong>
+                <p style="margin: 2px 0 0; color: var(--muted);">Enterprise AI agents for customer operations. Raising $1.2M seed.</p>
+              </div>
+              <span class="tag">VC-ready</span>
+            </article>
+            <article class="pipeline-item">
+              <div class="avatar" style="background: var(--green);">A</div>
+              <div>
+                <strong>AgriModel</strong>
+                <p style="margin: 2px 0 0; color: var(--muted);">Predictive crop intelligence with field data advantage. Grant and angel fit.</p>
+              </div>
+              <span class="tag">Grant fit</span>
+            </article>
+            <article class="pipeline-item">
+              <div class="avatar" style="background: var(--amber);">S</div>
+              <div>
+                <strong>SecureSynth</strong>
+                <p style="margin: 2px 0 0; color: var(--muted);">AI security testing for regulated software teams. Needs pilot evidence.</p>
+              </div>
+              <span class="tag">Pilot first</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--blue);">How It Works</span>
+            <h2>From AI opportunity to investable decision.</h2>
+          </div>
+          <p>The workflow helps founders raise with stronger evidence and helps investors review opportunities with less guesswork.</p>
+        </div>
+
+        <div class="workflow">
+          <article class="step">
+            <b>01</b>
+            <h3>Profile</h3>
+            <p>Capture sector, stage, model type, revenue, traction, team, data advantage, and funding goals.</p>
+          </article>
+          <article class="step">
+            <b>02</b>
+            <h3>Score</h3>
+            <p>Assess market quality, AI defensibility, revenue logic, risk, compliance, and proof of demand.</p>
+          </article>
+          <article class="step">
+            <b>03</b>
+            <h3>Match</h3>
+            <p>Identify suitable grants, angels, venture funds, accelerators, and strategic investors.</p>
+          </article>
+          <article class="step">
+            <b>04</b>
+            <h3>Prepare</h3>
+            <p>Improve pitch materials, data room readiness, diligence answers, and round milestones.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="investors">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--blue);">For Investors</span>
+            <h2>Review AI companies with stronger signals.</h2>
+          </div>
+          <p>Fundrai helps investors screen AI deal flow, compare risk, generate diligence questions, and monitor portfolio companies after investment.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">S</div>
+            <h3>Screen Deal Flow</h3>
+            <p>Filter by stage, sector, model risk, data moat, revenue quality, and funding readiness.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--rose);">Q</div>
+            <h3>Ask Better Questions</h3>
+            <p>Generate targeted diligence questions for data rights, model performance, adoption, compliance, and unit economics.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" style="background: var(--green);">R</div>
+            <h3>Track Runway</h3>
+            <p>Monitor burn, milestones, hiring, customer proof, revenue growth, and follow-on readiness.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="wrap cta-box">
+        <div>
+          <h2>Fund the next wave of AI with better intelligence.</h2>
+          <p>Use Fundrai to prepare AI companies for capital and help investors evaluate opportunities with practical, evidence-based signals.</p>
+        </div>
+          <a class="btn btn-primary" href="mailto:hello@fundrai.sbs">Contact Fundrai</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <h3>Fundrai</h3>
+        <p>Funding and investment intelligence for AI startups, founders, investors, and portfolio teams.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#product-service">Product & Service</a>
+          <a href="#fit">Funding Fit</a>
+          <a href="#deals">Deal Pipeline</a>
+        </div>
+      </div>
+      <div>
+        <h4>Capital</h4>
+        <div class="footer-links">
+          <a href="#features">Investor Matching</a>
+          <a href="#features">Due Diligence</a>
+          <a href="#investors">Investor Tools</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="mailto:hello@fundrai.sbs">hello@fundrai.sbs</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms and Conditions</a>
+          <span>AI funding intelligence platform</span>
+        </div>
+      </div>
+      <div class="copyright">&copy; 2026 Fundrai. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const fitBtn = document.getElementById("fitBtn");
+    const fitResult = document.getElementById("fitResult");
+
+    function formatMoney(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(value);
+    }
+
+    fitBtn.addEventListener("click", () => {
+      const stage = Number(document.getElementById("stage").value);
+      const revenue = Math.max(Number(document.getElementById("revenue").value) || 0, 0);
+      const moat = Number(document.getElementById("moat").value);
+      const capital = Math.max(Number(document.getElementById("capital").value) || 0, 0);
+      const score = Math.min(100, Math.round(stage * 18 + moat * 12 + Math.min(revenue / 2500, 20) + Math.min(capital / 100000, 12)));
+      let path = "grant funding, accelerator support, and traction building";
+      let action = "tighten customer proof and define the first fundable milestone.";
+
+      if (score >= 78) {
+        path = "seed or venture fundraising";
+        action = "prepare a focused data room, investor list, and diligence answers.";
+      } else if (score >= 58) {
+        path = "angel round, strategic pilot funding, or seed preparation";
+        action = "secure stronger pilot evidence and sharpen use-of-funds logic.";
+      } else if (score >= 40) {
+        path = "grant funding, accelerator support, and early angel conversations";
+        action = "prove demand before running a broad investor process.";
+      }
+
+      fitResult.innerHTML = `
+        <strong>${score}/100 funding readiness</strong>
+        Suggested path: ${path}. Capital target reviewed: ${formatMoney(capital)}. Next step: ${action}
+      `;
+    });
+  </script>
+</body>
+</html>
